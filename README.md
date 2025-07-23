@@ -1,6 +1,6 @@
 # AFVoices — Bambara 600 h Pre‑processing Pipeline
 
-> **Purpose** · This repo collects the **scripts and helper bash utilities** used by our data‑processing assistants to turn **≈ 600 h of raw Bambara speech stored in Google Cloud Storage (GCS)** into segmented, reviewed, and share‑ready manifests.  Think of it as your *operations manual* – follow it top‑to‑bottom and you will create reproducible, high‑quality data.
+This repo collects the **scripts and helper bash utilities** used by our data‑processing assistants to turn **≈ 600 h of raw Bambara speech stored in Google Cloud Storage (GCS)** into segmented, reviewed, and share‑ready manifests.  Think of it as our audio preprocessing *operations manual*.
 
 ---
 
@@ -81,6 +81,26 @@ pip install -r requirements.txt
 
 ---
 
-## 4 · License
+## 4 · Mounting the Cloud Bucket
+
+Ensure the following directory structure for your working directory at the end of your work:
+
+```
+assistN/
+ ├─ exportable/     # Exportable manifests with GSC links
+ ├─ manifests/      # Transcribed manifest with local paths
+ ├─ processed/     # Segmented Wav files
+ ├─ raw/          # Raw Wav files
+ ├─ review/ 
+ │   ├─ 12-57-53-1752165470311_manifest.json
+ │   ├─ 00-12-53-17521654744_manifest.json
+ │   ├─ ...  
+ |   └─ 18-14-25-17514750120_manifest.json
+ └─ 
+```
+
+---
+
+## 5 · License
 
 Code is MIT‑licensed © 2025 RobotsMali AI4D Lab.  Audio are under creative common.
