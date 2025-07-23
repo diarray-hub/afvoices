@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Usage:
-# ./mount_gcs_assist.sh <credential_path> <assist_id> <mount_point>
+# ./setup.sh <bucket_name> <credential_path> <assist_id> <mount_point>
 #
 # Example:
-# ./mount_gcs_assist.sh path/to/gcsfuse-access.key.json assistN path/to/mount_point
+# ./setup.sh my-bucket path/to/gcsfuse-access.key.json assistN path/to/mount_point
 
 set -e
 
