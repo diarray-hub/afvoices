@@ -18,9 +18,9 @@ import json
 import os
 from urllib.parse import quote
 
-GCS_BASE_URL = "https://storage.googleapis.com/"
+GCS_BASE_URL = "gs://"
 
-def export_manifest_with_gcs(manifest_path: str, gcs_bucket_name: str, root_folder: str):
+def export_manifest_with_gcs(manifest_path: str, gcs_bucket_name: str, root_folder: str, export_dir: str):
     """
     Export a new manifest where each audio_filepath is replaced with its GCS public/download URL.
     Args:
@@ -52,7 +52,7 @@ def export_manifest_with_gcs(manifest_path: str, gcs_bucket_name: str, root_fold
 
     # Save
     basename = os.path.basename(manifest_path)
-    out_dir = "exportable"
+    out_dir = export_dir
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, basename)
     
@@ -69,10 +69,11 @@ def main():
     parser = argparse.ArgumentParser(description="Export manifest with GCS URLs for audio files.")
     parser.add_argument("--manifest_path", type=str, required=True, help="Path to the original manifest (json or jsonl)")
     parser.add_argument("--gcs_bucket_name", type=str, required=True, help="GCS bucket name, e.g. my-bucket")
-    parser.add_argument("--root_folder", type=str, help="assistN folder name, e.g. 'assist1'")
+    parser.add_argument("--root_folder", required=True, type=str, help="The parent folder relative to the relpaths in the manifests;  e.g. 'assist1'")
+    parser.add_argument("--export_dir", type=str, default="exportable", help="Directory to save the exported manifest")
 
     args = parser.parse_args()
-    export_manifest_with_gcs(args.manifest_path,  args.gcs_bucket_name, args.root_folder)
+    export_manifest_with_gcs(args.manifest_path,  args.gcs_bucket_name, args.root_folder, args.export_dir)
 
 if __name__ == "__main__":
     main()
