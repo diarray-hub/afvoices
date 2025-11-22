@@ -27,7 +27,7 @@ If you want to reconstruct the HF dataset with the original file names you can u
 
 ## ASR finetuning experiments
 
-We ran Automatic Speech Recognition experiments with a pre-completion subset of this dataset, you can find all the codes and configurations used for those experiments in the dedicated repository: [RobotsMali-AI/bambara-asr](https://github.com/RobotsMali-AI/bambara-asr/tree/main/afvoices). All the models can be found on [RobotsMali's HuggingFace profile](https://huggingface.co/datasets/RobotsMali/models)
+We ran Automatic Speech Recognition experiments with a pre-completion subset of this dataset, you can find all the codes and configurations used for those experiments in the dedicated repository: [RobotsMali-AI/bambara-asr](https://github.com/RobotsMali-AI/bambara-asr/tree/main/afvoices). All the models can be found on [RobotsMali's HuggingFace profile](https://huggingface.co/RobotsMali/models)
 
 ---
 
