@@ -4,7 +4,7 @@ This repo collects the **helper utilities** used by our data‑processing team t
 
 We share dev-versions of the code, meaning the scripts in this repository are the first implementation and tests of our preprocessing pipeline using Google Cloud Storage FUSE, the code is therefore not optimized for large scale processing but useful if you wish to reproduce the work or have a better understanding of the different components of our pipeline.
 
-We have made the raw recordings and then associated metadata and segmentation timestamps publicly available for download, you can download and reconstitute the dataset with the links in manifest/raw-and-meta-600.jsonl. You can also download our SNR evaluation for 612 hours that we processed.
+We have made the raw recordings and then associated metadata and segmentation timestamps publicly available for download, you can download and reconstitute the dataset with the links in manifest/raw-and-meta-600.jsonl. You can also download our [SNR evaluation](https://storage.googleapis.com/africa-voice-mali.firebasestorage.app/afvoices/snr.csv) for 612 hours that we processed.
 
 ---
 
