@@ -10,7 +10,7 @@ We have made the raw recordings and their associated metadata and segmentation t
 
 ## 2 · The Hugging Face Dataset
 
-We have processed about 612 hours of those recordings, 159 for which we have corrected the automatically generated transcriptions. We release this segmented version of the dataset on hugging face. A total of 423 hours, for more details please check the dataset card on HF: [RpbotsMali/afvoices](https://huggingface.co/datasets/RobotsMali/afvoices).
+We have processed about 612 hours of those recordings, 159 for which we have corrected the automatically generated transcriptions. We release this segmented version of the dataset on hugging face. A total of 423 hours, for more details please check the dataset card on HF: [RobotsMali/afvoices](https://huggingface.co/datasets/RobotsMali/afvoices).
 
 ### Use this dataset
 
