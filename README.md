@@ -1,53 +1,37 @@
-# AFVoices — Bambara 600 h Pre‑processing Pipeline
+# Afvoices — Bambara 600 h Pre‑processing Pipeline
 
-This repo collects the **scripts and helper bash utilities** used by our data‑processing assistants to turn **≈ 600 h of raw Bambara speech stored in Google Cloud Storage (GCS)** into segmented, reviewed, and share‑ready manifests.  Think of it as our audio preprocessing *operations manual*.
+This repo collects the **helper utilities** used by our data‑processing team to transform the **626 hours** of raw Bambara speech that we have recorded as part of the African Next Voices (ANV) project into segmented, pre-labeled and share‑ready manifests.  Think of it as our audio preprocessing *operations manual*.
 
----
+We share dev-versions of the code, meaning the scripts in this repository are the first implementation and tests of our preprocessing pipeline using Google Cloud Storage FUSE, the code is therefore not optimized for large scale processing but useful if you wish to reproduce the work or have a better understanding of the different components of our pipeline.
 
-## 0 · TL;DR
-
-```bash
-# 1 · one‑time machine prep (Ubuntu ≥22.04)
-./scripts/gcsfuse-install.sh           # install gcsfuse & deps
-
-# 2 · mount a specific folder of the bucket read‑write (each of you already has a working home dir, e.g assist1)
-./scripts/setup.sh <bucket> <cred.json> <assist_id> <mount_point> # (e.g mnt)
-
-# 4 · segment + transcribe your newly‑assigned WAVs
-python3 scripts/seg-and-transcribe.py  \
-        --audio_path ./mnt/raw/path_to_audio.wav
-
-# 5 · manual QC – 25% of segments
-python3 scripts/review.py              \
-        --manifest_path ./path/to/manifest.jsonl
-
-# 6 · generate another manifest with the (GCS URLs)
-python3 scripts/export-manifest.py     \
-        --manifest ./path/to/manifest.jsonl \
-        --gcs_bucket_name <bucket> --root_folder assistN > manifest_gcs.jsonl
-```
-
-*(Swap `assist1` with `assist2/3` depending on who you are.)*
+We have made the raw recordings and then associated metadata and segmentation timestamps publicly available for download, you can download and reconstitute the dataset with the links in manifest/raw-and-meta-600.jsonl. You can also download our SNR evaluation for 612 hours that we processed.
 
 ---
 
-## 1 · Repository Layout
+## 2 · The Hugging Face Dataset
 
+We have processed about 612 hours of those recordings, 159 for which we have corrected the automatically generated transcriptions. We release this segmented version of the dataset on hugging face. A total of 423 hours with, for more details please check the dataset card on HF: [RpbotsMali/afvoices](https://huggingface.co/datasets/RobotsMali/afvoices).
+
+### Use this dataset
+
+```python
+
+from datasets import load_dataset
+
+ds = load_dataset("RobotsMali/afvoices", "human-corrected") # or "model-annotated" / "short"
 ```
-afvoices/
- ├─ scripts/           # All automation lives here
- │   ├─ seg-and-transcribe.py  # VAD segmentation + Whisper
- │   ├─ review.py      # ncurses‑style 3‑question reviewer
- │   ├─ export-manifest.py     # turn local paths → GCS URLs
- │   ├─ calculate-duration.py  # quick sanity stats on a manifest
- │   ├─ setup.sh       # mount helper (gcsfuse + mkdirs)
- │   └─ gcsfuse-install.sh     # one‑liner installer for gcsfuse
- └─ README.md          # you are here
-```
+
+If you want to reconstruct the HF dataset with the original file names you can use the [download_from_gcs](./scripts/download_from_gcs.py) script and the jsonl files in the manifest folder of this repo to download the segments from GSC.
 
 ---
 
-## 2 · Prerequisites
+## ASR finetuning experiments
+
+We ran Automatic Speech Recognition experiments with a pre-completion subset of this dataset, you can find all the codes and configurations used for those experiments in the dedicated repository: [RobotsMali-AI/bambara-asr](https://github.com/RobotsMali-AI/bambara-asr/afvoices). All the models can be found on [RobotsMali's HuggingFace profile](https://huggingface.co/datasets/RobotsMali/models)
+
+---
+
+## 4 · Prerequisites
 
 | Requirement            | Why                  | Install hint                        |
 | ---------------------- | -------------------- | -------------------------------     |
@@ -66,7 +50,9 @@ pip install -r requirements.txt
 
 ---
 
-## 3 · Mounting the Cloud Bucket
+## 5 · Mounting a Cloud Bucket
+
+If you have copied that data on a GCS and want to test the pipeline, you can mount your bucket as follow:
 
 1. Obtain **service‑account JSON credentials** with read‑write rights.
 2. Run `setup.sh`:
@@ -81,26 +67,14 @@ pip install -r requirements.txt
 
 ---
 
-## 4 · Mounting the Cloud Bucket
+## 6 · License
 
-Ensure the following directory structure for your working directory at the end of your work:
+Code is MIT‑licensed © 2025 RobotsMali AI4D Lab.  Audio are under Creative Common (cc-by-4.0).
 
+## 7 · Citation
+
+If you found this dataset useful for your research and wish to cite it, please cite this paper:
+
+```bibtex
+***BibTex entry coming soon***
 ```
-assistN/
- ├─ exportable/     # Exportable manifests with GSC links
- ├─ manifests/      # Transcribed manifest with local paths
- ├─ processed/     # Segmented Wav files
- ├─ raw/          # Raw Wav files
- ├─ review/ 
- │   ├─ 12-57-53-1752165470311_manifest.json
- │   ├─ 00-12-53-17521654744_manifest.json
- │   ├─ ...  
- |   └─ 18-14-25-17514750120_manifest.json
- └─ 
-```
-
----
-
-## 5 · License
-
-Code is MIT‑licensed © 2025 RobotsMali AI4D Lab.  Audio are under creative common.
