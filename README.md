@@ -76,5 +76,13 @@ Code is MIT‑licensed © 2025 RobotsMali AI4D Lab.  Audio are under Creative 
 If you found this dataset useful for your research and wish to cite it, please cite this paper:
 
 ```bibtex
-***BibTex entry coming soon***
+@misc{diarra2025dealinghardfactslowresource,
+      title={Dealing with the Hard Facts of Low-Resource African NLP}, 
+      author={Yacouba Diarra and Nouhoum Souleymane Coulibaly and Panga Azazia Kamaté and Madani Amadou Tall and Emmanuel Élisé Koné and Aymane Dembélé and Michael Leventhal},
+      year={2025},
+      eprint={2511.18557},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2511.18557}, 
+}
 ```
