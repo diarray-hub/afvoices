@@ -73,7 +73,7 @@ Code is MIT‑licensed © 2025 RobotsMali AI4D Lab.  Audio are under Creative 
 
 ## 7 · Citation
 
-If you found this dataset useful for your research and wish to cite it, please cite this paper:
+If you found this dataset useful for your research and wish to cite us, you can use this BibTex entry:
 
 ```bibtex
 @misc{diarra2025dealinghardfactslowresource,
